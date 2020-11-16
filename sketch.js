@@ -6,8 +6,6 @@ let portName = '/dev/tty.usbmodem14101'; // fill in your serial port name here
 let inData; // for incoming serial data
 
 // let TROMBETTA
-let colore = 'FFFFFF'; //per cambiare il colore dell'ellisse
-let coloreStroke = "#887b86";
 let stadioIcon, trombaIcon, tscuraIcon; //icone
 let h = 20; //altezza barra %;//altezza barra percentuale
 let pos; //posizione
@@ -23,9 +21,11 @@ let n_interazione = 0; //var utente usa la trobetta, preme bottone
 /////////////////////////////////////////////////////////////////////////
 
 function preload() {
-  stadioIcon = loadImage("./assets/stadio.png");
-  trombaIcon = loadImage("./assets/trombetta.png"); //trombetta chiara
-  tscuraIcon = loadImage("./assets/tscura.png"); //trombetta chiara
+  stadioIcon = loadImage("./assets/immagini/stadio.png"); //trombetta scura
+  trombaIcon = loadImage("./assets/immagini/trombettaBianca.png"); //trombetta chiara
+  tscuraIcon = loadImage("./assets/immagini/tscura.png"); //trombetta chiara
+  tut1Icon = loadImage("./assets/immagini/Trombetta_tut_1.png") //trombetta tutorial 1
+  tut2Icon = loadImage("./assets/immagini/Trombetta_tut_2.gif") //trombetta tutorial 2
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -50,22 +50,6 @@ function setup() {
 /////////////////////////////////////////////////////////////////////////
 
 function draw() {
-
-  // if(inData == 49){
-  //   colore = "#887b86";
-  //   coloreStroke = "#887b86";
-  // console.log('on')}
-  // else {
-  //   colore = "#f9f9f8";
-  //   coloreStroke = "#887b86" ;
-  // console.log('off')};
-  // fill(colore);
-  // stroke(coloreStroke);
-  // strokeWeight(5);
-  // ellipse(windowWidth/2,windowHeight/2,100);
-  // pop();
-
-
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi
   pos = width / 6; //posizione oggetti
@@ -147,24 +131,35 @@ function draw() {
     p_coord = 0;
   }
 
-  if (inData == 49) {
-    push();
-    noFill();
-    image(trombaIcon, width / 2, height / 2, trombaIcon.width / 7, trombaIcon.height / 7);
-    stroke('#B7AEB5');
-    strokeWeight(5);
-    ellipse(width / 2, height / 2, 90); //cerchio centrale
-    pop();
-  } else { //cambio colore dle bottone centrale: feedback utente
-    push();
-    noFill();
-    image(tscuraIcon, width / 2, height / 2, tscuraIcon.width / 7, tscuraIcon.height / 7); // trombetta scura
-    stroke('#877B85');
-    strokeWeight(5);
-    ellipse(width / 2, height / 2, 90); //cerchio centrale
-    pop();
+  textSize(16);
+  fill('#B7AEB5'); //3 PALETTE
+  //TUTORIAL TROMBETTA
+  if (i == 0 || i == 2) {
+    image(tut1Icon, width / 2, height / 2, tut1Icon.width / 7, tut1Icon.height / 7);
+    text('TUTORIAL', width / 2, height / 6 * 3.5);
+  } else if (i == 1 || i == 3) {
+    image(tut2Icon, width / 2, height / 2, tut2Icon.width / 7, tut2Icon.height / 7);
+    text('TUTORIAL', width / 2, height / 6 * 3.5);
   }
 
+  //ICONE NORMALI
+  if (inData == 49 && i > 3) {
+    push();
+    fill('#877B85');
+    stroke('#877B85');
+    strokeWeight(5);
+    ellipse(width / 2, height / 2, 100); //cerchio centrale
+    image(trombaIcon, width / 2, height / 2, trombaIcon.width / 7, trombaIcon.height / 7);
+    pop();
+  } else if (inData == 49 == false && i > 3) { //cambio colore dle bottone centrale: feedback utente
+    push();
+    noFill();
+    stroke('#877B85');
+    strokeWeight(5);
+    ellipse(width / 2, height / 2, 100); //cerchio centrale
+    image(tscuraIcon, width / 2, height / 2, tscuraIcon.width / 7, tscuraIcon.height / 7); // trombetta scura
+    pop();
+  }
 }
 
 // function SERIAL
