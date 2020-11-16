@@ -1,5 +1,5 @@
 let serial; // variable to hold an instance of the serialport library
-let portName = '/dev/tty.usbmodem14201'; // fill in your serial port name here
+let portName = '/dev/tty.usbmodem14101'; // fill in your serial port name here
 // let options = {baudrate: 9600}; // change the data rate to whatever you wish
 // serial.open(portName, options);
 let inData; // for incoming serial data
