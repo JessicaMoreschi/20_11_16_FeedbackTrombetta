@@ -123,7 +123,7 @@ function draw() {
 
   //PER LA BARRA DELLA PERCENTUALE
   //interazione utente, temporaneamente tasto trombetta
-  if (alt != 1 & inData == 49) {
+  if (alt != 1 & (inData == 49 || keyIsDown(ENTER))) {
     n_interazione += 4; // per far tornare la percentuale in pai alla trombetta
     p_coord = round((n_interazione / n_trombetta) * 100) * 2;
   } else if (alt = 1) {
@@ -143,7 +143,7 @@ function draw() {
   }
 
   //ICONE NORMALI
-  if (inData == 49 && i > 3) {
+  if ((inData == 49 || keyIsDown(ENTER)) && i > 3) {
     push();
     fill('#877B85');
     stroke('#877B85');
@@ -151,7 +151,7 @@ function draw() {
     ellipse(width / 2, height / 2, 100); //cerchio centrale
     image(trombaIcon, width / 2, height / 2, trombaIcon.width / 7, trombaIcon.height / 7);
     pop();
-  } else if (inData == 49 == false && i > 3) { //cambio colore dle bottone centrale: feedback utente
+  } else if ((inData == 49 || keyIsDown(ENTER)) == false && i > 3) { //cambio colore dle bottone centrale: feedback utente
     push();
     noFill();
     stroke('#877B85');
