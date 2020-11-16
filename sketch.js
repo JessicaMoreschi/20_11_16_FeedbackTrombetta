@@ -3,11 +3,13 @@ let portName = '/dev/tty.usbmodem14101'; // fill in your serial port name here
 // let options = {baudrate: 9600}; // change the data rate to whatever you wish
 // serial.open(portName, options);
 let inData; // for incoming serial data
-let colore = 'red'; //per cambiare il colore dell'ellisse
+let colore = 'FFFFFF'; //per cambiare il colore dell'ellisse
+let coloreStroke = "#887b86";
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  let myCanvas = createCanvas(windowWidth, windowHeight);
+  myCanvas.position(0,0);
   serial = new p5.SerialPort(); // make a new instance of the serialport library
   serial.on('list', printList); // set a callback function for the serialport list event
   serial.on('connected', serverConnected); // callback for connecting to the server
@@ -51,17 +53,20 @@ function printList(portList) {
 }
 
 function draw() {
-   // background(0);
+   background("#f9f9f8");
    // fill(255);
-   // text("sensor value: " + inData, 30, 30);
    push();
    if(inData == 49){
-     colore = 200
+     colore = "#887b86";
+     coloreStroke = "#887b86";
    console.log('on')}
-   else if (inData == 48){
-     colore = 'red'
+   else {
+     colore = "#f9f9f8";
+     coloreStroke = "#887b86" ;
    console.log('off')};
    fill(colore);
+   stroke(coloreStroke);
+   strokeWeight(5);
    ellipse(windowWidth/2,windowHeight/2,100);
    pop();
 }
